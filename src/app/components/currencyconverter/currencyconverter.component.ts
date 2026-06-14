@@ -22,6 +22,7 @@ export class CurrencyconverterComponent implements OnInit {
   tofilteredCurrencies: string[] = [];
   convertedAmount: number | null = null;
   loading: boolean = true;
+  date : string = '';
 
   amountForm = new FormGroup({
     //form group and form label for amounts
@@ -45,7 +46,10 @@ export class CurrencyconverterComponent implements OnInit {
           this.currencyCodes = Object.keys(this.rates);
           this.fromfilteredCurrencies = [];
           this.tofilteredCurrencies = [];
+          this.showToast();
           this.loading = false;
+          this.date = data.time_last_update_utc;
+          console.log('Date of last update:', this.date.substring(0, 5));
         },
         error: (error) => {
           console.error('Error fetching exchange rates:', error);
@@ -94,6 +98,7 @@ export class CurrencyconverterComponent implements OnInit {
   fromselectCurrency(fromcurrency: string) {
     this.fromcurrencyControl.setValue(fromcurrency);
     this.fromfilteredCurrencies = [];
+    this.showToast();
     this.convertCurrency(Number(this.amountForm.get('amount')?.value) || 0, this.tocurrencyControl.value || '');
     
 
@@ -166,4 +171,14 @@ export class CurrencyconverterComponent implements OnInit {
   
   
  }
+
+ showMessage = false;
+
+showToast() {
+  this.showMessage = true;
+
+  setTimeout(() => {
+    this.showMessage = false;
+  }, 3000); // 3 seconds
+}
 }
