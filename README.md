@@ -1,27 +1,130 @@
-# CurrencyConvertor
+# Currency Converter App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+A simple Angular application that converts an amount from any selected currency to any other selected currency using live exchange rates fetched from an API. Users can choose both the source and target currencies from searchable dropdowns, and conversion results update instantly as they type or change selections.
 
-## Development server
+## 🚀 Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* **Live Exchange Rates:** Fetches real-time currency rates from an exchange rate API.
+* **Default INR Conversion:** Converts amounts from any selected currency to a other any selected currency.
+* **Searchable Currency Dropdown:** Easily search and select from a large list of currencies.
+* **Real-Time Updates:** Conversion result updates instantly when the amount or currency changes.
+* **Responsive Design:** Clean and mobile-friendly UI built with Angular and Tailwind CSS.
+* **API Integration:** Uses Angular services and HTTP Client to fetch exchange rate data.
+* **Type Safety:** Uses TypeScript interfaces for API response handling.
 
-## Code scaffolding
+## 🛠️ Tech Stack
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Angular 18+
+* TypeScript
+* Reactive Forms
+* Angular HTTP Client
+* Tailwind CSS
+* HTML
+* CSS
 
-## Build
+## 📂 Project Structure
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```text
+currency-converter/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   └── currencyconverter/
+│   │   │       ├── currencyconverter.component.ts
+│   │   │       ├── currencyconverter.component.html
+│   │   │       ├── currencyconverter.component.scss
+│   │   │       └── currencyconverter.component.spec.ts
+│   │   │
+│   │   ├── models/
+│   │   │   └── exchangerateresponse.model.ts
+│   │   │
+│   │   ├── services/
+│   │   │   └── currency.service.ts
+│   │   │
+│   │   ├── app.component.ts
+│   │   ├── app.component.html
+│   │   ├── app.component.scss
+│   │   ├── app.component.spec.ts
+│   │   ├── app.config.ts
+│   │   └── app.routes.ts
+│   │
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.scss
+│
+├── angular.json
+├── package.json
+├── tailwind.config.js
+└── README.md
+```
 
-## Running unit tests
+# Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 1. Clone the Repository
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/priyankanegiii/currency-converter.git
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 2. Navigate to the Project Folder
 
-## Further help
+```bash
+cd currency-converter
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 3. Install Dependencies
+
+```bash
+npm install
+```
+
+## 4. Run the Application
+
+```bash
+ng serve
+```
+
+## 5. Open in Browser
+
+```bash
+http://localhost:4200
+```
+
+Or visit the deployed version:
+
+```bash
+https://your-deployed-link.vercel.app
+```
+
+## 🔄 How It Works
+
+1. Enter an amount in INR.
+2. Search and select a target currency from the dropdown.
+3. The application fetches live exchange rates.
+4. The converted amount is displayed instantly.
+5. Exchange rates update automatically whenever new data is fetched.
+
+
+## 📊 API Response Model
+
+```typescript
+export interface ExchangeRateResponse {
+  result: string;
+  base_code: string;
+  time_last_update_utc: string;
+  rates: {
+    [key: string]: number;
+  };
+}
+```
+
+---
+
+<div align="center">
+
+## Made with ❤️ using Angular & Tailwind CSS
+
+*Currency Converter - Fast, accurate, and real-time currency conversions.*
+
+</div>
+
