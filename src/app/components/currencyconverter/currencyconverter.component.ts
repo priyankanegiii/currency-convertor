@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CurrencyService } from '../../services/currencyservice';
+import { CurrencyService } from '../../services/currency.service';
 import { ExchangeRateResponse } from '../../models/exchangerateresponse';
 import { OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
