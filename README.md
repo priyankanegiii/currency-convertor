@@ -93,7 +93,7 @@ http://localhost:4200
 Or visit the deployed version:
 
 ```bash
-https://your-deployed-link.vercel.app
+https://currency-convertor-black-one.vercel.app/
 ```
 
 ## 🔄 How It Works
