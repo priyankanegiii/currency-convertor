@@ -13,22 +13,47 @@
 
 .input-container{
     @apply  flex flex-col items-center;
+  
 }
 
-.amount-input{
-    @apply border border-gray-300 rounded-md p-2 ml-2  ;
-}
+// .amount-input{
+//     @apply border border-gray-300 rounded-md p-2 ml-2  ;
+    
+    
+// }
 .form-label{
     @apply mb-2 text-lg font-medium ;
 }
 
+// .search-container{
+//     @apply flex flex-row items-center m-4;
+// }
+
 .search-container{
-    @apply flex flex-row items-center m-4;
+    @apply flex flex-col gap-2 w-full;
+    @apply mt-5 p-4;
+}
+
+@media (min-width: 640px) {
+    .search-container{
+        @apply flex-row items-center;
+    }
+
+    .form-label{
+        @apply w-32 mb-0;
+    }
 }
 
 .search-input{
-    @apply border border-gray-300 rounded-md p-2 ml-2;
+    @apply w-full border border-gray-300 rounded-md p-2;
 }
+
+.amount-input{
+    @apply w-full border border-gray-300 rounded-md p-2;
+}
+// .search-input{
+//     @apply border border-gray-300 rounded-md p-2 ml-2;
+// }
 
 .result-container{
     @apply mt-4 p-4 bg-gray-100 rounded-md;
