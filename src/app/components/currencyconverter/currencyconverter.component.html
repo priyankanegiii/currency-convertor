@@ -1,0 +1,110 @@
+<h1 class="heading">Currency Converter</h1>
+<div class="container">
+  <div class="input-container">
+    <form [formGroup]="amountForm" class="currency-form">
+      <label for="amt" class="form-label">Enter Amount:</label>
+      <input
+        type="number"
+        id="amt"
+        formControlName="amount"
+        placeholder="enter amount"
+        class="amount-input"
+        (keydown)="preventNegative($event)"
+      />
+       
+    </form>
+    @if (currencycontrol?.invalid && currencycontrol?.touched) {
+              @if (currencycontrol?.errors?.["required"]) {
+                <span class="error">Amount is required.</span>
+              }
+              @if (currencycontrol?.errors?.["min"]) {
+                <span class="error">Amount must be a positive number.</span>
+              }
+            }
+    <div class="search-container">
+      <label for="currency1" class="form-label">From Currency:</label>
+
+      <div class="relative">
+        <input
+          type="text"
+          id="currency1"
+          placeholder="Search for a currency..."
+          class="search-input"
+          [formControl]="fromcurrencyControl"
+        />
+
+        @if (fromfilteredCurrencies.length > 0) {
+          <ul
+            class="absolute top-full left-0 mt-1 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-50"
+          >
+            @for (currency of fromfilteredCurrencies; track currency) {
+              <li
+                class="p-2 cursor-pointer hover:bg-gray-100"
+                (click)="fromselectCurrency(currency)"
+              >
+                {{ currency }}
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+    <div class="exchange-icon" (click)="swap()">
+        <i class="fa-solid fa-arrows-up-down"></i>
+    </div>
+    <div class="search-container" >
+      <label for="currency2" class="form-label">To Currency:</label>
+
+      <div class="relative">
+        <input
+          type="text"
+          id="currency2"
+          placeholder="Search for a currency..."
+          class="search-input"
+          [formControl]="tocurrencyControl"
+        />
+
+        @if (tofilteredCurrencies.length > 0) {
+          <ul
+            class="absolute top-full left-0 mt-1 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-50"
+          >
+            @for (currency of tofilteredCurrencies; track currency) {
+              <li
+                class="p-2 cursor-pointer hover:bg-gray-100"
+                (click)="toselectCurrency(currency)"
+              >
+                {{ currency }}
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="result-container">
+    @if(loading){
+  <span class="loading-text">Loading exchange rates...</span>
+    }
+
+    
+  @else{
+    <p class="result-text">
+      Converted Amount: {{ convertedAmount  }} 
+    </p>
+
+  }
+    
+
+  </div>
+  <div class="exchange-rate-container">
+    <p class="exchange-rate-text">
+        @if(fromcontrol && tocontrol ){
+            1 {{ fromcurrencyControl.value }} = {{ rates[tocurrencyControl.value!] || 'N/A' }} {{ tocurrencyControl.value }}
+        }
+      @else{
+        Please select both currencies to see the exchange rate.
+      }
+    </p>
+
+  </div>
+</div>

@@ -1,0 +1,53 @@
+.heading{
+    @apply text-blue-500 text-3xl font-bold mb-5;
+}
+
+.container{
+    @apply bg-white p-5  rounded-lg shadow-md;
+    @apply w-full max-w-md mx-auto;
+    @apply flex flex-col gap-4 p-4;
+    
+    
+  
+}
+
+.input-container{
+    @apply  flex flex-col items-center;
+}
+
+.amount-input{
+    @apply border border-gray-300 rounded-md p-2 ml-2  ;
+}
+.form-label{
+    @apply mb-2 text-lg font-medium ;
+}
+
+.search-container{
+    @apply flex flex-row items-center m-4;
+}
+
+.search-input{
+    @apply border border-gray-300 rounded-md p-2 ml-2;
+}
+
+.result-container{
+    @apply mt-4 p-4 bg-gray-100 rounded-md;
+}
+
+.result-text{
+    @apply text-lg font-medium;
+}
+
+.error{
+    @apply text-red-500 text-[0.7rem];
+}
+
+i.fa-solid.fa-arrows-up-down{
+    @apply text-blue-500 text-2xl;
+}
+
+.exchange-icon{
+    @apply flex justify-center my-4;
+    @apply w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center;
+    @apply hover:bg-gray-200 cursor-pointer;
+}
