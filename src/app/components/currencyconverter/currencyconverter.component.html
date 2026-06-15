@@ -32,8 +32,19 @@
           placeholder="Search for a currency..."
           class="search-input"
           [formControl]="fromcurrencyControl"
-        />
+          {keypress}="preventInteger($event)"
 
+        />
+        @if(fromcurrencyControl.invalid && fromcurrencyControl.touched){
+          @if(fromcurrencyControl.errors?.['required']){
+            <span class="error">Currency is required.</span>
+          }
+          @if(fromcurrencyControl.errors?.['pattern']){
+            <span class="error">Currency code must be 3 letters.</span>
+          }
+         
+        }
+        
         @if (fromfilteredCurrencies.length > 0) {
           <ul
             class="absolute top-full left-0 mt-1 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-50"
@@ -64,7 +75,15 @@
           class="search-input"
           [formControl]="tocurrencyControl"
         />
-
+        @if(tocurrencyControl.invalid && tocurrencyControl.touched){
+          @if(tocurrencyControl.errors?.['required']){
+            <span class="error">Currency is required.</span>
+          }
+          @if(tocurrencyControl.errors?.['pattern']){
+            <span class="error">Currency code must be 3 letters.</span>
+          }
+          
+        }
         @if (tofilteredCurrencies.length > 0) {
           <ul
             class="absolute top-full left-0 mt-1 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-50"
@@ -90,7 +109,7 @@
     
   @else{
     <p class="result-text">
-      Converted Amount: {{ convertedAmount  }} {{tocurrencyControl.value }}
+      Converted Amount: {{ convertedAmount  }}@if(tocontrol!=null) {{{ tocurrencyControl.value }}}
     </p>
 
   }
@@ -109,6 +128,7 @@
 
   </div>
 </div>
+
 @if(showMessage){
 <div class="mssg">
   <p>Last updated: {{date.substring(0, 16)}}</p>

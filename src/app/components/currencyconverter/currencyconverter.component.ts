@@ -29,8 +29,8 @@ export class CurrencyconverterComponent implements OnInit {
     amount: new FormControl(' ', [Validators.required, Validators.min(1)]),
   });
 
-  fromcurrencyControl = new FormControl('INR' ,[ Validators.required ,Validators.min(1) ]); //form control for from currency
-  tocurrencyControl = new FormControl('', Validators.required);
+  fromcurrencyControl = new FormControl('INR' ,[ Validators.required,  Validators.pattern(/^[A-Za-z]{3}$/)]); //form control for from currency
+  tocurrencyControl = new FormControl('', [Validators.required ,  Validators.pattern(/^[A-Za-z]{3}$/)]);
 
   //to use the currency service to fetch the exchange rates
   constructor(private currencyService: CurrencyService) {}
@@ -41,7 +41,6 @@ export class CurrencyconverterComponent implements OnInit {
       .getData(this.fromcurrencyControl.value || 'INR')
       .subscribe({
         next: (data: ExchangeRateResponse) => {
-          console.log('Exchange rates fetched successfully:', data);
           this.rates = data.rates;
           this.currencyCodes = Object.keys(this.rates);
           this.fromfilteredCurrencies = [];
@@ -49,7 +48,6 @@ export class CurrencyconverterComponent implements OnInit {
           this.showToast();
           this.loading = false;
           this.date = data.time_last_update_utc;
-          console.log('Date of last update:', this.date.substring(0, 5));
         },
         error: (error) => {
           console.error('Error fetching exchange rates:', error);
@@ -104,7 +102,6 @@ export class CurrencyconverterComponent implements OnInit {
 
     this.currencyService.getData(fromcurrency).subscribe({
       next: (data) => {
-        console.log('SUCCESS', data);
         this.rates = data.rates;
         this.loading = false;
       },
@@ -135,6 +132,8 @@ export class CurrencyconverterComponent implements OnInit {
   }
 }
 
+ 
+
  get currencycontrol(){
   return this.amountForm.get('amount');
  }
@@ -144,9 +143,7 @@ export class CurrencyconverterComponent implements OnInit {
   if(this.currencyCodes.includes(String(this.fromcurrencyControl.value ))){
   return this.fromcurrencyControl.value;
  }
- else{
-  return null;
- }
+return null;
 
  
 
@@ -156,17 +153,31 @@ export class CurrencyconverterComponent implements OnInit {
   if(this.currencyCodes.includes(String(this.tocurrencyControl.value ))){
   return this.tocurrencyControl.value;
  }
- else{
-   return null;
- }
+  return null;
 
  }
  
  temp : string='';
+
  swap(){
   this.temp=this.fromcurrencyControl.value || '';
   this.fromcurrencyControl.setValue(this.tocurrencyControl.value || '');
   this.tocurrencyControl.setValue(this.temp || '');
+  this.tofilteredCurrencies =[];
+  this.fromfilteredCurrencies = [];
+  this.currencyService.getData(this.fromcurrencyControl.value || '').subscribe({
+      next: (data) => {
+        console.log('SUCCESS', data);
+        this.rates = data.rates;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.log('ERROR', err);
+        this.loading = true;
+      },
+    });
+
+  this.convertCurrency(Number(this.amountForm.get('amount')?.value) || 0, this.tocurrencyControl.value || '');
  
   
   
@@ -181,4 +192,6 @@ showToast() {
     this.showMessage = false;
   }, 3000); // 3 seconds
 }
+
+
 }
