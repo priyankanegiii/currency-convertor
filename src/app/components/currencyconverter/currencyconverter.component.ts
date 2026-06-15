@@ -169,6 +169,7 @@ return null;
       next: (data) => {
         console.log('SUCCESS', data);
         this.rates = data.rates;
+        this.convertCurrency(Number(this.amountForm.get('amount')?.value) || 0, this.tocurrencyControl.value || '');
         this.loading = false;
       },
       error: (err) => {
@@ -177,8 +178,7 @@ return null;
       },
     });
 
-  this.convertCurrency(Number(this.amountForm.get('amount')?.value) || 0, this.tocurrencyControl.value || '');
- 
+  
   
   
  }
